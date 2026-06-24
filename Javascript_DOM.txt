@@ -1,0 +1,1499 @@
+DOM
+===
+Document Object Model - Document - It refer HTML file
+Object - Html Tags  Model layout Structure Like HTML Document
+DOM - is exactly what allows you to dynamically create, modify, and 
+make interactive web applications by changing the content, structure, and style of a webpage using JavaScript.
+
+Modify Content – Change text, images, links, etc.
+Modify Structure – Add, remove, or rearrange elements.
+Modify Style – Change CSS properties dynamically.
+Handle Events – Respond to user actions like clicks, typing, etc.
+
+Every DOM behind the scenes it refer to window object internally;
+
+console.log(window); - window object u can view using this line
+
+console.dir(document); - document object u can view this line
+
+window.history()
+================
+history.back() - back page
+history.forward() - next page
+history.go(-1);- back page
+history.go(1); next page
+history.go(2); two page
+history.go(0); current page
+
+Timings Events
+=============
+setInterval()
+=============
+continous execution after a fixed time interval until u stio it manually - clearInterval() calls
+let ids = setInterval(()=>{
+                window.location.href="http://127.0.0.1:5500/index.html";
+            },2000);
+            clearInterval(ids);
+
+function greet()
+{
+   console.log("hello");
+}
+let ids= setInterval(greet,2000);
+clearInterval(ids);
+
+setTimeout()
+===========
+function called only once
+to clear timeout then use it clearTimeout()
+ let outs = setTimeout(()=>{
+                console.log("hello");
+            },2000);
+            clearTimeout(outs);
+function greet()
+{
+   console.log("hello");
+}
+let ids= setTimeout(greet,2000);
+clearTimeout(ids);
+
+windows.alert("alert box");
+window.confirm("sometext");
+window.prompt("yes","defaultText");
+
+javascript document
+==================
+Constructed as a tree of object 
+access any element in html page you always start with accessing the document object
+console.log 
+=========== - element representation
+print values , HTML View 
+var para = document.getElementById("one");
+console.log(para);//<p id="one">hrello</p>
+console.dir - object represntation
+===================================
+Inspect Object,JS Object View, prototype shown
+Inspect DOM Element we can use
+var para = document.getElementById("one");
+console.dir(para);//p#one//print document DOM object Properties
+
+
+change the head in html page
+============================
+document.head.children[0].innerText = 'Leaning JS Using DOM'
+Change the HTML tag using js
+=============================
+document.body.children[2].innerHTML='<h1>Avira,Aadhya</h1>';
+
+EventListener()
+==============
+HTML Code it will create DOM Object automatically  atlast it will create event at the end
+whenver specific event need to be delievrd or target.
+
+if the HTML execution call event before execution then use EventListener().
+
+DisAdvantage
+============
+if the function or object already written eventhandler function then it will not add it second time.
+if event handler need to be called then we need to remove existing eventhandler function by using removeEventHandler().
+
+
+without using eventListener()
+==============================
+<html>
+    <head>
+        <title>Learning DOM</title>
+        <script>
+           var app = document.getElementById('one');
+           console.log(app);
+           console.log(app.innerHTML);//error
+           let app2= app.innerHTML=`<h1>${app}</h1>`;
+           Console.log(app2);
+        </script>
+    </head>
+    <body>
+        <div id ='one'>
+            <h1> learning js</h1>
+        </div>
+    </body>
+</html>
+outpout 
+=======
+Cannot read properties of null (reading 'innerHTML') error.
+
+not possible - elementById even before the call so thrown error
+addeventListener() will solve the issue.
+ 
+1.DOMContentLoaded
+================
+Fired when the document has been completely loaded and parse without waiting for stylesheet,images 
+
+<html>
+    <head>
+        <title>Learning DOM</title>
+        <script>
+          var one =  document.addEventListener('DOMContentLoaded',()=>{
+           var app =  document.getElementById('one');
+           var chn = app.innerHTML=`<h1>Latest Js Changes !!!!!<h1>`;
+          });
+        </script>
+    </head>
+    <body>
+        <div id ='one'>
+            <h1> learning js</h1>
+        </div>
+    </body>
+</html>
+output
+======
+EventIndex.html:9 <h1>Latest Js Changes !!!!!<h1>
+
+
+disadvantage
+============
+<html>
+    <head>
+        <title>Learning DOM</title>
+        <script>
+          document.addEventListener('DOMContentLoaded',()=>{
+           var app =  document.getElementById('one');
+           console.log(app);
+           var two = app.children[0];
+           console.log(two);
+           var imag = app.children[1];
+           console.log(imag.offsetWidth,imag.offsetHeight);
+           var chn = app.innerHTML=`<h1>Latest Js Changes !!!!!<h1>`;
+            console.log(chn);
+          });
+        </script>
+    </head>
+    <body>
+        <div id ='one'>
+            <h1> learning js</h1>
+            <img src="https://wallpaperaccess.com/full/5654291.jpg" alt="santa"/>
+        </div>
+    </body>
+</html>
+
+output
+=======
+image width shows 0,0
+document.eventListener() - loaded and parsed any images and stylesheet it will not give result it return simply 0.
+
+Windows.eventListener()
+=======================
+this will give result of images and stylesheet as well HTML and DOM Ready.
+
+window.addEventListener('load',()=>{
+           var app =  document.getElementById('one');
+           //console.log(app);
+           var two = app.children[0];
+          // console.log(two);
+           var imag = app.children[1];
+           console.log(imag.offsetWidth,imag.offsetHeight);
+           var chn = app.innerHTML=`<h1>Latest Js Changes !!!!!<h1>`;
+            //console.log(chn);
+          });
+		  
+output
+=====
+images width and height 1366 1024
+
+2.ReadyStateChange()
+====================
+Fires whenever the document.readyState property changes.
+"loading" – The document is still loading.
+"interactive" – The DOM is fully parsed, but sub-resources (images, stylesheets) may still be loading.
+"complete" – The page and all resources are fully loaded.
+
+document.addEventListener('readyStateChange',()=>{
+   if(document.readyState='interactive')
+   {
+   console.log("DOM is ready (like DOMContentLoaded).");
+   }
+   else if (document.readyState=='complete')
+   {
+     console.log("Everything loaded (like window.onload).");
+   }
+})
+1.Can detect multiple stages of loading.
+2.Works in older browsers (including old IE).
+
+removeEventHandler()
+===================
+
+function handleDOMContent()
+{
+   var two =  document.getElementById('one');
+   var inpit = two.children[0];
+   var inpout2 = two.children[1];
+   console.log(inpout2.offsetWidth,inpout2,offsetHeight);
+   inpit.innerHTML=`<h1>LatestIMage</h1>`;
+}
+
+document.addEventListener('DOMContentLoaded',handleDOMContent);
+document.removeEventListener('DOMContentLoaded',handleDOMContent)
+
+const function = ()=>{
+var two =  document.getElementById('one');
+   var inpit = two.children[0];
+   var inpout2 = two.children[1];
+   console.log(inpout2.offsetWidth,inpout2,offsetHeight);
+   inpit.innerHTML=`<h1>LatestIMage</h1>`;
+};
+document.addEventListener('DOMContentLoaded',function);
+document.removeEventListener('DOMContentLoaded',function);
+
+window.onLoad 
+=============
+Multiple event not allowed it overwrite previous event handler data,
+remove listener is not possible.
+
+window.addEventListener('load')
+===============================
+yes it is allow multiple event handler and it is not overwrite previous values  
+remove listener is possible and modern method.
+
+window.unload vs window.addEventListener('unload')
+==================================================
+it fires when user close tab and logout cleanup clsoing connection'
+
+window.beforeunload
+===================
+before leaving it shows confirmation dialog like Are u sure want to leave?
+it fires when user close tab etc..
+
+window.addEventListener('beforeunload',()=>{
+   return 'are u sure?'
+});
+
+Document DOM Selector methods
+=============================
+document.getElementById(id); - one element
+docuemnt.getElementsByClassName(className); - multiple element 
+const fruits = document.getElementsByClassName('fruits');
+for(let val of fruit)
+{
+   console.log(val.innerHTML);or innerText or TextContent
+}
+
+querySelector
+=============
+return first element within the document that selector it no matches found null is returned
+
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <h1>heading</h1>
+        <p>solve</p>
+        <h1 class="one">heading 2</h1>
+        <p class="two">solve</p>
+    </body>
+    <script>
+      const res =  document.querySelector('h1');
+      console.log(res);
+    </script>
+</html>
+
+
+Using class name 
+================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <h1>heading</h1>
+        <p>solve</p>
+        <h1 class="one">heading 2</h1>
+        <p class="two">solve</p>
+    </body>
+    <script>
+      const res =  document.querySelector('h1.one');
+      console.log(res);
+      console.log(res.innerText);
+      console.log(res.textContent);
+      const result = document.querySelector('p.two');
+      console.log(result);
+      console.log(result.innerText);
+    </script>
+</html>
+
+Using Id 
+========
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <h1 id="demo-1">heading</h1>
+        <p id="demo-2">solve</p>
+        <h1 class="one">heading 2</h1>
+        <p class="two">solve</p>
+    </body>
+    <script>
+      const val = document.querySelector('#demo-1');
+      console.log(val);
+      console.log(val.innerText);
+      const value = document.querySelector('#demo-2');
+      console.log(value.innerText);
+    </script>
+</html>
+
+Uising parent - tag 
+===================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <div>
+        <h1 id="demo-1">heading</h1>
+        <p id="demo-2">solve</p>
+        </div>
+        <div>
+        <h1 class="one">heading 2</h1>
+        <p class="two">solve</p>
+        </div>
+    </body>
+    <script>
+     const val =  document.querySelector('div>p');//working
+	 const val =  document.querySelector('div p');//working
+     console.log(val);
+     console.log(val.innerText);
+    </script>
+</html>
+
+
+Using tag attribute
+===================
+
+Select the first <a> element that has a "target" attribute:
+
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+<a href="https://www.w3schools.com">w3schools.com</a>
+<a href="http://www.disney.com" target="_blank">disney.com</a>
+<a href="http://www.wikipedia.org" target="_top">wikipedia.org</a>
+    </body>
+    <script>
+      const val = document.querySelector('a[target]');
+      console.log(val);
+      console.log(val.innerText);
+    </script>
+</html>
+
+Using multiple elements
+=======================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <h1>heading</h1>
+        <p>solve</p>
+        <h2>heading 2</h1>
+        <p>solve</p>
+    </body>
+    <script>
+     const val =  document.querySelector('h1,h2');
+     console.log(val);
+     console.log(val.innerText);
+    </script>
+</html>
+output
+======
+heading - h1 element
+
+Using id with first and last element
+=====================================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <ul id="list">
+            <li>APple</li>
+            <li>Ugly</li>
+            <li>bad</li>
+            </ul>
+    </body>
+    <script>
+      let val = document.querySelector('#list li:first-child');
+      console.log(val.innerText);
+      let val2 = document.querySelector('#list li:last-child');
+      console.log(val2.innerText);
+    </script>
+</html>
+Using to get 2 nd element
+========================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <ul id="list">
+            <li>APple</li>
+            <li>Ugly</li>
+            <li>bad</li>
+            </ul>
+    </body>
+    <script>
+      let val1 = document.querySelector('#list li:nth-child(2)');//nth-of-type(2)
+      console.log(val1.innerText);
+    </script>
+</html>
+
+QuerySelectorAll
+================
+return all elements that return that matches a selector and return nodelist if no matches found then throw SYNTAX_ERR exception.
+separate elemnt 
+===============
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <p class="fruit">apple</p>
+        <p class="fruit">mango</p>
+        <p class="fruit">orange</p>
+    </body>
+    <script>
+      let val = document.querySelectorAll('p');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+seperate class name
+===================
+separate elemnt 
+===============
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <p class="fruit">apple</p>
+        <p class="fruit">mango</p>
+        <p class="fruit">orange</p>
+    </body>
+    <script>
+      let val = document.querySelectorAll('.fruit');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select all same ids
+===================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <div>
+        <p id="fruit">apple</p>
+        <p id="fruit">mango</p>
+        <p id="fruit">orange</p>
+        </div>
+    </body>
+    <script>
+      let val = document.querySelectorAll('#fruit');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select all same class
+====================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <p class="fruit">apple</p>
+        <p class="fruit">mango</p>
+        <p class="fruit">orange</p>
+    </body>
+    <script>
+      let val = document.querySelectorAll('p.fruit');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+selct element inside parent
+===========================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <div>
+        <p class="fruit">apple</p>
+        <p class="fruit">mango</p>
+        <p class="fruit">orange</p>
+        </div>
+    </body>
+    <script>
+      let val = document.querySelectorAll('div p');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select all using multi elements
+================================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <div>
+          <h1>header</h1>
+          <p>hello</p>
+        </div>
+    </body>
+    <script>
+      let val = document.querySelectorAll('h1,p');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select all with a target attribute
+==================================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+        <div>
+          <a href="https://www.w3schools.com">w3schools.com</a>
+<a href="http://www.disney.com" target="_blank">disney.com</a>
+<a href="http://www.wikipedia.org" target="_top">wikipedia.org</a>
+        </div>
+    </body>
+    <script>
+      let val = document.querySelectorAll('a[target]');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select all with nth child
+========================
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+            <ul id="list">
+            <li>APple</li>
+            <li>Ugly</li>
+            <li>bad</li>
+            </ul>
+    </body>
+    <script>
+      let val = document.querySelectorAll('#list li:nth-child(even)');
+      val.forEach(item=>{
+        console.log(item.innerText);
+      });
+    </script>
+</html>
+
+select input textbox
+=====================
+<input type='text' value='A'/>
+const val = document.querySelector('input[type='text']');
+console.log(val.value);
+
+
+<input type='text' value='A'/>
+<input type='text' value='B'/>
+<input type='text' value='C'/>
+
+let va=document.querySelectorAll('input[type='text']');
+va.forEach(item=>{
+console.log(item.value)
+});
+
+
+NodeList
+========
+Array Like Collections of nodes.It is accessed by Index number start from 0 ..
+You cannot use push(),pop() array method.Not real array but array 
+it is not update automatically and static nodelist
+collection of document nodes (element nodes, attribute nodes, and text nodes).
+NodeList items can only be accessed by their index number.
+The childNodes property returns a live NodeList.
+
+<p>apple</p> <p>apple</p> <p>apple</p>
+it is not update automatically and static nodelist
+=================================================
+const val = document.querySelectorAll('p');
+document.body.innerHTML = '<p>Avacado</p>'
+nodelist examples
+=================
+const val = document.querySelectorAll('p');
+console.log(val);nodelist[3];
+console.log(val[0]);//val[1]//val[2]
+
+HTML Collections
+================
+collection of document elements.
+HTMLCollection items can be accessed by their name, id, or index number.
+An HTMLCollection is always a live collection. Example: 
+If you add a <li> element to a list in the DOM, the list in the HTMLCollection will also change.
+document.body.innerHTML = '<p>Avacado</p>'
+The getElementsByClassName() and getElementsByTagName() document.children methods return a live HTMLCollection.
+
+ChildNodes vs Children
+=====================
+childNodes
+=========
+return all child nodes of an element
+includes-> elements,text (spaces/new lines),comments
+<html>
+    <head>
+        <title>header</title>
+    </head>
+    <body>
+            <div id="list">
+            <p>APple</p>
+            <p>Ugly</p>
+            <p>bad</p>
+            </div>
+    </body>
+    <script>
+        const box = document.getElementById('list');
+        console.log(box.childNodes);
+    </script>
+</html>//NodeList(7) [text, p, text, p, text, p, text]0: text1: p2: text3: p4: text5: p6: textlength: 7[[Prototype]]: NodeList
+
+access childNodes
+================
+ <script>
+        const box = document.getElementById('list');
+        console.log(box.childNodes[1]);
+    </script>//p tag
+	
+forloop
+=======
+<script>
+        const box = document.getElementById('list');
+        box.childNodes.forEach(node=>{
+console.log(node.nodeName);
+        })
+    </script>
+	//#text,P,#text,P,#text,P, #text
+NodeType
+========
+<script>
+        const box = document.getElementById('list');
+        box.childNodes.forEach(node=>{
+console.log(node.nodeType);
+        })
+    </script>
+	//1 - element  3 - text 8 - comment
+
+
+ChildNode vs children
+=====================
+childNodes - Text,elements,comments
+children - only elements
+
+Create Element and Attributes 
+===============================
+const one = document.createElement('p');
+one.innerText='Sad';
+document.body.appendChild(one);
+
+Using Id
+=========
+const one = document.createElement('p');
+one.innerText='sanju';
+document.getElementById('list').appendChild(one);
+
+Using InsertBefore()
+===================
+<ul id="list">
+            <li>APple</li>
+            <li>Ugly</li>
+            <li>bad</li>
+            </ul>
+<script>
+     const one = document.createElement('li');
+     one.innerText='sanju';
+     document.getElementById('list').appendChild(one);
+</script>
+
+Add it in first elements
+========================
+<ul id="list">
+            <li>APple</li>
+            <li>Ugly</li>
+            <li>bad</li>
+            </ul>
+    <script>
+       const one = document.createElement('li');
+       one.innerText='sanju';
+       const two = document.getElementById('list');
+       two.insertBefore(one,two.children[0]);
+    </script>
+
+Normal Script , Async Script and Defer Script
+==============================================
+Normal Script
+==============
+<Script src='index.js'/>
+external script excution load/downlaod script and
+ executed some block happen - poor page load expereince and user experience and slower page load 
+and then resume html parsing happend finished 
+
+some block happen solve in async
+===============================
+async script
+============
+<script>console.log('html page started ')</script>
+ not block happens 
+load/download script load parellley 
+<Script async src='index.js'/>
+executed finished .
+usage
+=====
+chatsupport
+3rd party script use then like google script
+analystic script 
+
+defer script
+============
+started 
+not block happens 
+all load/download script load
+<Script defer src='index.js'/>
+and defer script executed last 
+usage 
+=====
+if the user develop this page then use this 
+shoppingcart
+
+Asynchronous
+============
+Prevents browser freeze which is critical for user expereince
+js execute top to bottom left to right line by line code
+
+why we use Asynchronous
+======================
+1.Some tasks take time to finish (network requests, timers, user input).
+2.To stay responsive, JavaScript can use async programming.
+3.Asynchronous flow refers to how JavaScript allows certain operations to run in the background and let their results be handled when they are ready.
+4.If JavaScript waited for these tasks, the page would freeze.
+5.Asych code lets the rest of the program continue to run.
+6.Async code does not run immediately.
+
+SetTimeout() is a kind of asynchronous operation
+Callback() is a kind of asynchronous operation once runs after something has finished.
+
+Promise
+=======
+It Provides result,
+1.A Promise object represents the completion or failure of an asynchronous operation.
+2.A promise represents a value that will be available later.
+3.A promise is a container for a future result.
+4.The result can be a value or an error.
+5.By default promise handled error .
+
+A Promise can be in one of three exclusive states:
+
+pending	 -   operation started (not finished) - The initial state; the operation has started but is neither fulfilled nor rejected.
+rejected -	operation failed - The operation completed successfully, and a value is available.
+fulfilled -	operation completed - The operation failed, and a reason (error) is available.
+
+Syntax
+======
+let myPromise = new Promise(function(resolve, reject) {
+// Code that may take some time
+resolve(value); // when successful
+reject(value);  // when error
+});
+
+const promises = new promises((resolve,reject)=>{
+   resolve(value);
+   reject(value);
+});
+
+then() -success
+================
+consume the promises result success.
+
+.catch()- reject handled
+========================
+consume the promises reject failure
+
+.finally()
+==========
+even if the code is success or failure this code will run
+
+Why we use Promise
+===================
+Single Thread Language - javascript
+reduce code several callback() function
+if we integrated 3 rd party js file then there is some network delay to overcome this promise asynchronous operation we are using.
+Better error handling: .catch() makes handling errors straightforward.
+Chaining: Promises allow sequential execution of async tasks using .then().
+Integration with async/await: Modern JavaScript uses Promises under the hood for async/await, making async code look synchronous.
+modern support
+
+
+Examples
+=======
+const coffeeMachine = false;
+const orderCoffee = new Promise((resolve,reject)=>{
+   if(coffeeMachine)
+   {
+      resolve('your coffee is being ready');
+   }
+   else{
+      reject('currenlty coffee machine is out of service');
+   }
+});
+console.log(orderCoffee);
+orderCoffee.then((msg)->{
+    console.log(msg);
+}).catch((error)=>{
+console.log(error);
+}).finally(()=>{
+  console.log('Thanks for coming !!..')
+});
+example 2
+=========
+const coffeeMachine = false;
+const orderCoffee = new Promise((resolve,reject)=>{
+   if(coffeeMachine)
+   {
+      const val = 20;
+      resolve({msg : 'your coffee is being ready',val});
+   }
+   else{
+      reject('currenlty coffee machine is out of service');
+   }
+});
+console.log(orderCoffee);
+orderCoffee.then((result)->{
+    console.log(result.msg);
+	console.log(result.val)
+}).catch((error)=>{
+console.log(error);
+}).finally(()=>{
+  console.log('Thanks for coming !!..')
+});
+
+
+//output 
+resolve will accept only one  parameter
+
+Multi Promise
+=============
+const coffemachine = true;
+const orderCoffee = new promise((resolve,reject)=>{
+  if(coffemachine)
+  {
+     resolve('order coffee');
+  }
+  else{
+     reject('order coffe failed');
+  }
+});
+ordercoffee.then((msg)=>{
+  console.log(msg);
+  return new Promise((resolve,reject)=>{
+     resolve('coffee order amout is 20');
+  });
+})
+.then((billInfo)=>{
+    console.log(msg);
+	return new Promise((resolve,reject)=>{
+     reject('coffee order amout is 20');
+  });
+}).catch((error)=>{
+   console.log(error);
+}).finally((msg)=>{
+    console.log('thanks for coming');
+})
+
+Promise static methods()
+=======================
+1.promise.all() - if error occur then executed error code not give any result only error not data. promise wil return rejected status only
+2.promise.resolve();
+3.promise.reject();
+4.promise.allSettled(); if error occur then executed all code give all result with error and data .promise wil return both fulfilled and rejected 
+- student pass and fail status
+5.promise.race()
+6.promise.any()
+
+
+examples
+========
+const p1 = new Promise((resolve,reject)=>{
+   setTimeout(resolve('this is car'),1000);
+})
+const data = Promise.resolve('resolve this issue');
+const err = Promise.reject('reject this error');
+
+promise.all([p1,data,err]).then((data)=>{
+ console.log(data)
+}).catch((error)=>console.log(error));//if any one of the error then() would  not be executed catch block only executed.
+
+sample examples
+==============
+
+const userId = (userId)=>{
+   return new Promise((resolve,reject)=>{
+   setTimeout(()=>resolve[
+        {id: 1,name:'dinagaran',emailId:'dina27ece'},{id:2,name:'sankr','emailId':'fagg'}
+   ])
+   },1000)
+};
+
+const userPost= (userPost)=>{
+ return new promise((resolve,reject)=>{
+     setTimeout(()=>resolve[
+	   {id:1,title:'gagga'},{id:2,title:'ajhbdha'}
+	 ])
+ },2000)
+};
+
+const userComments = (userComments)=>{
+  return new promise((resolve,reject)=>{
+      setTimeout(()=>resolve[
+	     {id:1,comments:'hsf'},{id:2,comments:'hafsf'}
+	  ])
+  },2000)
+}
+
+const combine=(userId)=>{
+   return Promise.all([userId(userId),userPost(userId),userComments(userId)]).then((response)=>{
+     //console.log(response) return response;
+   }).catch(error=>{ console.error(error)})
+};
+
+combine(2).then((successresponse)=>{
+ console.log(successresponse)
+})
+
+promise.race()
+=============
+const p1 = new promise((resolve,reject)=>{
+  setTimeout(()=>resolve(
+      'one'
+  ),100)
+});
+const p2 = new promise((resolve,reject)=>{
+  setTimeout(()=>resolve('two'),500)
+});
+
+const p3= new Promise((resolve,reject)=>{
+  setTimeout(()=>reject('three'),50)
+});
+
+Promise.race([p1,p2]).then((msg)=>{console.log(msg)}).catch((err)=>{console.log(err)});
+
+output
+=====
+both promise which one shoule be executed that means first execution is less timeout
+//one output first
+//two output
+
+
+Promise.race([p1,p2,p3]).then((msg)=>{console.log(msg)}).catch((err)=>{console.log(err)});
+
+//even if the reject error which one is exceuted first using timeout thus only it will give output
+//three error shown as first
+
+promise.any()
+============
+accept promises 'fullfilled' value which one is executed first it will return output not even considered rejected status 
+const p1 = new promise((resolve,reject)=>{
+  setTimeout(()=>resolve(
+      'one'
+  ),100)
+});
+const p2 = new promise((resolve,reject)=>{
+  setTimeout(()=>resolve('two'),500)
+});
+
+const p3= new Promise((resolve,reject)=>{
+  setTimeout(()=>reject('three'),50)
+});
+
+Promise.any([p1,p2,p3]).then((msg)=> console.log(msg)).catch((error)=>{console.log(error)});
+
+output
+======
+one is first and it is fulfilled
+
+
+Async and Await
+==============
+async makes a function return a Promise - always used in function
+await makes a function wait for a Promise -  always used in function
+
+async function getUser()
+{
+ throw new Error('Something went wrong');
+   return 'Dina';
+}//return a promise object
+
+function getUser()
+{
+   return new Promise((resolve,reject)=>{
+     resolve('dina');
+   })
+};
+
+
+const res = getUser().then((success)=>{
+    console.log(success);
+},(error)=>{
+    console.error(error);
+});
+console.log(res);
+
+await
+=====
+whenever async function is there instead of then() use await
+
+Purpose: Pauses execution inside an async function until a Promise resolves.
+
+How it works: Makes async code look synchronous.
+
+Use case: Cleaner async flow without chaining .then().
+
+function getUserId(id)
+{
+    return new Promise((resolve,reject)=>{
+	    setTimeout(()=>{
+		resolve(id,name:'dina')
+		},1000)
+	});
+}
+
+function subscription(id)
+{
+    return new Promise((resolve,reject)=>{
+	    setTimeout(()=>{
+		 resolve([{id:id,subscribe:'hotstar'},{id:id,subscribe:'prime'}]);
+		},1000)
+	});
+}
+
+function subscriptionCost(subscriptions)
+{
+    return new Promise((resolve,reject)=>{
+	     setTimeout(()=>{
+		 resolve(subscription.length*100);
+		 },1000);
+	})
+}
+
+/*const msg = getUserId(1).then((userId)=>{
+     console.log(userId);
+}).then (subscriptions(1)).then(subscriptionCost).then((cost)=>{
+   console.log(cost);
+});*/
+
+instead of then() use await()
+=============================
+Promise chains can become long.
+
+async and await were created to reduce nesting and improve readability.
+
+async function displayCost()
+{
+
+    try{
+    const result = await getUserId(1);
+	const msg = await subscriptions(result.id);
+	const value = await subscriptionCost(msg);
+	}
+	catch(Error)
+	{
+	  console.error('catch',error);
+	}
+	.finally('userId is 1');
+	.finally('subscription:netflix');
+	.finally('subscription cost: 20000');
+	
+	console.log(value);
+	console.log('everything will wait here');
+}
+
+displayCost();
+
+Fetch API
+=========
+Instead of Ajax xmlhttprequest we are using fetch api because it is able to write cleanup code
+Simplified Syntax 
+in built streaming support - handled data largely autoload
+Request and Response are well defined 
+Header Manipulation - token key 
+Cross origin support
+better error handling
+
+Syntax
+======
+Fetch(url,requestInfo like Post,get,put,delete,patch) default get return promises
+then()
+=====
+const name = fetch('https:google.com').then((response)=>{
+console.log('response',response);
+console.log(response.body);//stream
+console.log(response.json())//return json data//response as text
+return response.json();
+}).then((data)=>{
+    console.log('google data: ' , data);
+});
+
+Error handling in fetch API
+==========================
+response.ok true then success
+response.ok false then failure
+
+fetch('http://google.com').then((response)=>{
+    const data =  response.json();
+	//if(response.ok)
+	//{
+	  // console.log(response);
+	//}
+	if(!response.ok)
+	{
+	   throw 'Something went wrong';//new Error('wrong');
+	}
+}).then((data)=>{//not executed when error was thrown
+console.log(data);
+}).catch((error)=>{
+  console.error(error);
+}).finally(()=>{
+  console.log('api validate')
+});
+
+Fetch Await and Async in Fetch API
+==================================
+
+async function doubleQuotes()
+{
+   try{
+    const data = await fetch('https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80');
+	if(!data.ok)
+	{
+	    throw new Error('Something went wrong');
+	}
+	    const responseVal = await data.json();
+	    console.log(responseVal);
+	}
+	catch(Error)
+	{
+	  console.error(error);
+	}
+}
+doubleQuotes();
+
+Request and Response - fetch API
+================================
+write it in async function  
+
+async function myrequestHeaders{
+const headers = new Headers();
+headers.append('content-type','application-type');
+headers.append('authroization',token);
+headers.append('x-key','secret-key');
+
+check if the key is persent or not
+==================================
+console.log(headers.has('x-key'));//true or false
+
+
+const req = new Request('https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80',{
+method:POST,
+headers: headers, or headers: {
+'content-type':'application-json',
+'authroiztaion':'bearer token'
+}
+body: json.stringify({id:1,name:dina,age:25}),
+mode: 'CORS',
+credentials: 'same-origin'
+});
+
+fetch (req).then((data)=> data.json()).then((res)=>console.log(res)).catch((error)=>console.log(error));
+}
+
+Response
+========
+async function myresponseHeadeers()
+{
+const response = new Response('https://gist.github.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80',{
+  headers: {
+   "x-key": "sajdj"
+  }
+  
+  fetch (response).then((response)=> {
+  console.log(response.status));
+  console.log(response.ok);
+  console.log('content-type','applicatoio/json');
+  console.log('response',response.get('x-key'));
+  }
+})
+console.log(response.get('x-key'));//text
+redirect: false;
+
+status:httpstatuscode
+statusText: http status messages
+ok: boolean for successfully response
+headers: resaponse headers
+type cors
+url : url response
+body : stream body content json() text() blob() formdata(),arrayBuffer()
+}
+
+JSON Stringify()
+=============
+1.Used when sending data to a server or storing in local storage.
+2.Converts objects into a JSON string format.
+
+convert object into string
+==========================
+const obj = {id:1,name:'dina',age:29};
+const str = json.stringify(obj);
+convert array into string
+==========================
+const arr = [id:1,name:'dina',age:29];
+const aarry = json.stringify(arr);
+
+JSON Parse()
+============
+Converts a JSON string into a JavaScript object
+Purpose
+=======
+1.Used when receiving JSON data (e.g., from an API or local storage).
+2.Converts text-based JSON into usable JavaScript objects.
+
+
+'{"name":"john","age":30,"city":"chennai"}';
+const obj = json.parse('{"name":"john","age":30,"city":"chennai"}');
+
+const text = '["Ford", "BMW", "Audi", "Fiat"]';
+const myArr = JSON.parse(text);
+
+Crud Operation
+==============
+Create Operation Fetch API
+=========================
+async function createQuotes()
+{
+    const createResponse= await fetch('https://mimic-server-api.vercel.app/quotes',{
+
+     method:'POST',
+     headers:{
+     'Content-Type': 'application/json'
+     },
+     body:JSON.stringify({
+       author: 'dinagaran',
+	   quote: 'Trust the Process'
+     }),
+    });
+    console.log(createResponse);
+    const data = await createResponse.json();
+    console.log(data);
+    alert('data inserted');
+}
+createQuotes();
+
+
+Update Quotes 
+=============
+async function updateQuotes()
+{
+   const updt = await fetch('https://mimic-server-api.vercel.app/quotes/42',{
+    method: 'PUT',
+    headers:{
+     'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      author: 'bala',
+      quote: 'never ever give up'
+    }),
+});
+console.log(updt);
+const data = await updt.json();
+console.log(data);
+alert('data has been updated');
+}
+
+updateQuotes();
+
+another way of calling updatequotes()
+=====================================
+(async function updateQuotes()
+{
+   const updt = await fetch('https://mimic-server-api.vercel.app/quotes/42',{
+    method: 'PUT',
+    headers:{
+     'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+      author: 'bala',
+      quote: 'never ever give up'
+    }),
+});
+console.log(updt);
+const data = await updt.json();
+console.log(data);
+alert('data has been updated');
+})()
+//updateQuotes();
+
+delete quotes
+============
+async function deleteQuotes(id)
+{
+   const deleteResponse = await fetch('https://mimic-server-api.vercel.app/quotes/'+id,{
+     method:'DELETE',
+     Headers:{
+       'Content-Type':'application/json',
+     },
+});
+   const data = await deleteResponse.json();
+   console.log(data);
+   alert('data has been deleted');
+}
+
+deleteQuotes(41);
+
+Patch Fetch API
+===============
+(async function patchQuotes(id)
+{
+     const patchResponse = await fetch('https://mimic-server-api.vercel.app/quotes/'+id,{
+       method: 'PATCH',
+       headers:{
+         'Content-Type':'application/json'
+       },
+       body:JSON.stringify({
+         author: 'elango'
+       }),
+    });
+    const data = await patchResponse.json();
+    console.log(data);
+    alert('patch data has been updated');
+})(40)
+
+
+Closure
+========
+closure is a function and store memory of its outer variable
+A closure is a function that remembers variables from its outer scope even after the outer function is finished.
+
+Examples
+=========
+function outerScope ()
+{
+  const name ="dinagaran";
+  const innerScope = ()=>{
+   console.log('inner scope', innerScope);
+  }
+  return innerScope;
+}
+const fn = outerScope();
+fn();
+console.log(fn);
+
+Examples 2 
+==========
+
+function outerCount()
+{
+   const count =0;
+   const innerCount = ()=>{
+   count++;
+   return count;
+   }
+}
+
+const inc = outerCount();
+console.log(inc());//1 console.log(inc());//2 console.log(inc());//3
+
+Examples 3
+=========
+   const a =10;
+function outer()
+{
+   const b =20;
+   const inner =  ()=>{
+   const c =30;
+   console.log(a+b+c);
+   }
+   inner();
+}
+outer()//output 60
+
+Examples 4
+===========
+function outerFunction(outsideData)
+{
+   const innerFunction = (outsideData)=>{
+   
+   console.log(outsideData);
+   
+   }
+   return innerFunction;
+}
+
+const innFn = outerFunction('dina');
+innFn;
+
+
+Examples 5 
+==========
+function outerFunction()
+{
+  let balance=1000;
+  return {
+    deposit(){
+	  balance += amount;
+	}
+	withdraw(amount){
+	if(amount>balance)
+	{
+	   console.log('insufficient balance')
+	}else{
+	balance -=amount;
+	 console.log('balance amount low')
+	}
+	
+	getBalance()
+	{
+	   return balance;
+	}
+	
+	}
+  
+  }
+}
+
+const acc = outerFunction();
+console.log(acc.deposit(500));//500 console.log(acc.withdraw(200));//200 
+console.log(acc.getBalance());//1300
+console.log(acc.balance);//no output

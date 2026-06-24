@@ -1,0 +1,454 @@
+javascript
+========== 
+ also called client side validation
+ is a high level interpreted programming language used for form validations, animations
+ work with HTML and CSS
+ Runs all browser without any installation
+ 1.DOM Usage
+ 2.Event Handling
+ 3.Data Handling
+let vs var vs const
+===================
+var - global functional scope - default - within function scope we can access and bind data to window object 
+var data ='message is clear';
+console.log(data);
+in ur browser enter window.data it return message is clear.
+
+function name()
+{
+   var a = 10l;
+}
+console.log(a);//101
+
+let - local scope you can modify/edit variables as you want and bind data not able  to  access window object 
+
+let data ='message is clear';
+console.log(data);
+in ur browser enter window.data it wil not return message is clear rather than return undefined
+
+
+function name()
+{
+   let a = 10l;
+}
+console.log(a);//a is undefined
+
+let a = 'dina'
+a = 'dinagaran'
+console.log(a);//dinagaran
+
+const -  is used to declare block-scoped variables whose binding (reference) cannot be reassigned after initialization
+const name = 'dina'
+name = 'dinagaran'
+console.log(name);//assignment constant error
+
+const name = {user:'dina',age:25};
+name.user = 'dinagaran'
+console.log(name);//modify values
+// name = { user: "Charlie" }; // ❌ not allowed
+
+preincrement and post increment
+===============================
+var a = 10;
+var b = ++a;
+console.log(b)//11 
+var a = 10;
+var b = a++;
+console.log(a);//11
+console.log(b);//10
+preincrement increase value to 1 then it assign/print
+post incrment- assign  value and then increment -  not printing value refer b -> printing value refer a 
+
+triple equal operator vs == operators
+=====================================
+=== refer datatypes strictly to compare if we use different datatypes then it return false
+string != integer
+console.log(1==='1')//false
+
+== lose equality operator
+=========================
+using same datatypes to compare return true suppose if we use different datatypes then it return true
+console.log(1==1)//true
+console.log('1'==1)//internal it will assign it to '1'=='1'
+string value automatically converts 2nd valueas string
+number compare automatically converts 2 nd values as numbers
+ 
+for in vs for Of
+================
+let colors = ['red','blue','orange'];
+for(let key in colors)
+{
+   console.log (key);//it will print index values 0,1,2
+}
+for(let val of colors)
+{
+   console.log(val);//it will print values from arrays // red,blue,orange
+}
+
+typeof
+======
+console.log(typeof(10));//number
+console.log(typeof('dina'))//string
+
+how to call object
+==================
+using dot notation
+using brackets
+ let val = {
+     name:"dina",
+	 age: 29
+	 address:{
+	   homeaddress: "pennagaram",
+	   workaddress: "chennai"
+	 }
+ };
+ console.log(val.name)//dina 
+ console.log(val.address.homeaddress)//pennagaram
+ 
+ console.log(val['name']);
+ console.log(val['age']);
+ console.log(val['address']['homeaddress'])//pennagaram
+
+
+using arrays
+============
+let name = ['dina','priya','remya'];
+let val = name[2];
+console.log(val);
+console.log(name[0]);
+
+object with function
+===================
+let val = {
+     name:"dina",
+	 age: 29
+	 address:{
+	   homeaddress: "pennagaram",
+	   workaddress: "chennai"
+	 }
+	 contact:function(){
+	    phoneno: "82y4828"
+	 }
+ };
+console.log(val.contact());
+
+es6 - temporal literal
+======================
+let val = {
+    name: "sbab",
+    age: 27,
+	parent:{
+	    name: "sankar"
+	}
+};
+function literal {
+    console.log(`name is ${val.age}, ${val.name} ${val.parent.name}`);
+}
+literal()
+
+Dynamic Object we can create and delete and modify same variable
+================================================================
+const name = {
+   age: 27
+}
+name.age= 28
+console.log(name.age);//28
+
+create 
+======
+const name = {
+   age: 27
+}
+name.color='red';
+name.laptop='hp';
+name.bike=function()
+{}
+console.log(name);//{ age: 27, color: 'red', laptop: 'hp', bike: [Function (anonymous)] }
+
+
+Object methods
+==============
+keys - convert object keys into arrays
+const det = { name: 'dina',age: 28,parent: {name : 'sankar'}};
+for(let val of object.keys(det))
+{
+   console.log(val);//[name,age,parent.name];
+}
+entries - convert object both key and values into arrays
+const val = {name: 'dina',age: 28,parent: {name : 'sankar'}};
+for(let user of object.entries(val))
+{
+   console.log(user);//[name:dina],[age:27],[parent:{name:'sankar'}]
+}
+
+assign - copy the object
+========================
+{}- refer new Object
+
+const test = {name: "hsfh",contact: 926653};
+let a = Object.assign({},test);
+console.log(a);
+
+const data = {name:"havds",email:"jafdhasf"};
+let b = Object.assogn({cost:73573},data);
+console.log(b);
+
+Arrays Methods 
+==============
+adding elements in arrays
+
+const name = ['Book','Study','laptop','libaray'];
+name[4]='pen';
+console.log(name);
+
+push() -> add  elements in end of the arrays
+const name = ['Book','Study','laptop','libaray'];
+name.push('lamp');
+console.log(name);//['Book','Study','laptop','libaray','lamp'];
+
+
+unshift()- add elements in start of the arrays
+const name = ['Book','Study','laptop','libaray'];
+name.push('lamp');
+console.log(name);//['lamp,''Book','Study','laptop','libaray'];
+
+
+splices()- remove or replace elements whatever position you want 
+const name = ['Book','Study','laptop','libaray'];
+name.splices(4,'lamp');//4th position we will add or remove
+console.log(name);//['Book','Study','laptop','libaray',''lamp,''];
+
+find(callabck), indexOf,lastIndexOf();
+const phone={id:1,brand:"apple",quan:1},{id:2,brand:"samsung',quant:2};
+let res = phone.find(function(val))
+{
+    val.brand =='apple'
+};
+console.log(res);//id:1,brand:apple,qunt:1
+
+remove an elements
+==================
+poll() remove last element,shift() remove first element,splices()
+
+splices()- remove elements whatever position you want 
+
+
+const name = ['Book','Study','laptop','libaray'];
+name.splices(4,3);//start posotion,delete position
+console.log(name);//['Book','Study','laptop','libaray'];
+
+
+forEach
+=========
+const profile = ['dina','priya','abdi'];
+for(let mar in profile)
+{
+   console.log(mar,profile[mar]]);//print index with values 0-dina,1-priya,2 - abdi
+}
+
+
+profile.forEach(function(home){
+      console.log(home);
+});
+
+Arrows functions
+================
+profile.forEach(home=> console.log(home));
+const values = [{id:1,name:'laptop',price:455000},{id:2,name:'samsung',price:72347},{id:3,name:'mac',price:6524}];
+values.filter((user)=>return user.filter<20000);
+
+filter()vs find()
+=================
+filter()
+=======
+Purpose: Returns all elements that match a condition.
+Return Type: Array (can be empty if no match is found).
+Stops?: Checks every element in the array.
+Use Case: When you need multiple matches.
+
+find()
+======
+Purpose: Returns the first element that matches a condition.
+Return Type: Single value (or undefined if no match).
+Stops?: Stops searching after the first match.
+Use Case: When you need only one match.
+
+const numbers = [1, 2, 3, 4, 5];
+
+let bhh = numbers.find((num)=> return num %2 ===0);
+console.log(bhh);//2 only
+
+map
+===
+transform into new object or array
+ 
+const numbers = [1, 2, 3, 4, 5];
+let cad = numbers.map((cards)=> return cards*2);
+console.log(cad);//[2,4,6,8,10];
+
+
+
+
+Arrows Functions
+=================
+1.no function name
+2.return value by default
+3.function parameter we can use 
+4.parenthesiss is not mandatory If there are no parameters, parentheses are required.
+
+Callbacks (e.g., in map, filter, forEach).
+const vegs = [{id:1,name:'onion',quant:500kg},{id:2,name:'tomato',quant: 500kg,id:3,name:'carrot',quant: 4300}];
+
+let res = vegs.findIndex((cook)=>cook.name=='carrot');
+console.log(res);
+
+hello(); // Error
+
+const hello = () => "Hello";
+
+
+Spread Operator vs Rest Operator
+================================
+Spread Operator - used for array,object,Strings
+Rest Operator - used for Functions
+expand in values - spread out 
+
+Spread Operator (...)
+====================
+let a = [1,4,6,7,9];
+let b = [...a,5,10];
+console.log(b);//[1,4,6,7,9,5,10]
+
+merge array 
+============
+let a = [1,6,7];
+let b = [2,5];
+const ba = [...a,...b];
+console.log(ba);
+
+copy object 
+===========
+let name = {age:"dina"};
+let details = {fauj: "ahfsgf"};
+let userDetails = {...name,...details,country:'india'};
+
+console.log(userDetails);//{age:dina,fauj:'ashsh',country:'india'};
+
+String 
+======
+let name = 'franklin';
+let use = [...name];
+console.log(use);//'f','r','a','n','k','l','i','n';
+ 
+let num = [16,677,43,23,12];
+console.log(Math.max(...num));
+
+Rest Operator(...)
+==================
+Collect remaining values into one variable as arrays
+used in function parameter
+
+without rest 
+============
+function add(a,b)
+{
+   console.log(a,b);
+}
+
+add(10,20,30,40,50);//10,20 // extra value lost 
+
+with Rest 
+=========
+function add(a,b,...rest)
+{
+   console.log(rest);//30,40 first 2 value go normally remainig values collected into rest
+}
+add(10,20,30,40);
+
+
+Rest Operator always comes last 
+================================
+function test (...a,b){} //wrong
+function test (a,b,...c){}//correct
+
+function add(...numbers)
+{
+   console.log(numbers);
+}
+add(...val);
+or add(1,2,4,5,6);//array//[1,2,4,5,6]
+
+
+Arrays Destructing 
+==================
+Extract single value from arrays.
+
+const name = [1,2,4,6];
+const [name1,,name3] = name;
+console.log(name1);//1 console.log(name3);//1,4
+
+let num = [1,5,6,7,2,4];
+let[a,...rest]=num;
+console.log(rest);//[ 5, 6, 7, 2, 4 ]
+console.log(a);//1
+
+
+default value destructing 
+========================
+let num =[10];
+let [a,b=20]=num;
+console.log(a,b);//[10,20]
+
+let num =[10,null];
+let [a,b=20]=num;
+console.log(a,b);//[10,null]
+
+//default value not used because value exists null in b variable
+
+Object Destructing
+==================
+let  emp = {
+   address: "chennai",
+   population:1724724,
+   city: "velcahry"
+};
+
+let {address} = emp;
+console.log(address);//chennai
+
+let  emp = {
+   address:{
+      contact:919319,
+	  state:'chennai'
+   },
+   population:1724724,
+   city: "velcahry"
+};
+
+
+let {address:{contact}}=emp;
+console.log(contact)//919319
+
+default value 
+==============
+let user = {name:'john'};
+
+let {name,city="chennai'}=user;
+console.log(name,city);
+
+new features in es6
+===================
+1.Variable Declaration
+2.Arrow functions
+3.Import and export
+4.Template Literals ``
+5.Spread Operators
+6.RestOperators
+7.Async/Awaits
+8.map()
+
+
+
+
+
+

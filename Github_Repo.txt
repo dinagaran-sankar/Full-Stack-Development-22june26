@@ -1,0 +1,72 @@
+PS C:\Users\10853596\IdeaProjects> git init
+Reinitialized existing Git repository in C:/Users/10853596/IdeaProjects/.git/
+PS C:\Users\10853596\IdeaProjects> git add.
+git: 'add.' is not a git command. See 'git --help'.
+
+The most similar command is
+        add
+PS C:\Users\10853596\IdeaProjects> git add .
+PS C:\Users\10853596\IdeaProjects> git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   E-Commerce-Stickers (modified content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\10853596\IdeaProjects> git commit -m "e-commerce-stickers"
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+        modified:   E-Commerce-Stickers (modified content)
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS C:\Users\10853596\IdeaProjects> git remote add origin https://github.com/dinagaran-sankar/spring-react-E-Commerce-Stickers.git
+error: remote origin already exists.
+PS C:\Users\10853596\IdeaProjects> git remote remove origin
+PS C:\Users\10853596\IdeaProjects> git remote add origin  git remote add origin https://github.com/dinagaran-sankar/spring-react-E-Commerce-Stickers.git                                                                                                                                              
+usage: git remote add [<options>] <name> <url>
+
+    -f, --[no-]fetch      fetch the remote branches
+    --[no-]tags           import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --[no-]track <branch>
+                          branch(es) to track
+    -m, --[no-]master <branch>
+                          master branch
+    --[no-]mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+PS C:\Users\10853596\IdeaProjects> git remote add origin  git remote add origin https://github.com/dinagaran-sankar/spring-react-E-Commerce-Stickers.git                                                                                                                                              
+usage: git remote add [<options>] <name> <url>
+
+    -f, --[no-]fetch      fetch the remote branches
+    --[no-]tags           import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --[no-]track <branch>
+                          branch(es) to track
+    -m, --[no-]master <branch>
+                          master branch
+    --[no-]mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+PS C:\Users\10853596\IdeaProjects>  git remote add origin https://github.com/dinagaran-sankar/spring-react-E-Commerce-Stickers.git                 
+PS C:\Users\10853596\IdeaProjects> git brach -M Main                                                                                               
+git: 'brach' is not a git command. See 'git --help'.
+
+The most similar command is
+        branch
+PS C:\Users\10853596\IdeaProjects> git branch -a
+  backend
+* main
+  master
+PS C:\Users\10853596\IdeaProjects> git push origin main
+Enumerating objects: 2, done.
+Counting objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 217 bytes | 108.00 KiB/s, done.
+Total 2 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/dinagaran-sankar/spring-react-E-Commerce-Stickers.git
+ * [new branch]      main -> main
